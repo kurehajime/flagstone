@@ -121,6 +121,11 @@ func SetUseNonFlagArgs(b bool) {
 	useNonFlagArgs = b
 }
 
+// SetCSS : Specify CSS
+func SetCSS(s string) {
+	css = s
+}
+
 // Launch : Capture the flag
 func Launch(title string, message string) ([]string, bool) {
 	done := make(chan bool)
