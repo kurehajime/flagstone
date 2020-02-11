@@ -66,4 +66,29 @@ go get github.com/kurehajime
 
     ![screenshot](https://user-images.githubusercontent.com/4569916/74208613-ac3b6d00-4cc7-11ea-9f3c-e686874f2e38.png)
 
-    
+## options
+
+#### SetPort
+
+Specify the port number.
+
+#### SetSubURL
+
+
+Specify sub URL.
+If not specified, it is determined randomly.
+
+
+#### SetSort
+
+Specify the order of the parameters.
+If not specified, it will be in ABC order.
+
+#### SetSilent
+
+If set to true, flagstone will not produce any extra output.
+
+#### SetUseNonFlagArgs
+
+If true is set, non-flag arguments are added.
+non-flag arguments can be obtained by the return value of the Lanch method.

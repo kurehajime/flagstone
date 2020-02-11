@@ -20,7 +20,7 @@ import (
 )
 
 var port int = 8081
-var windowName string = ""
+var subURL string = ""
 var nonFlagArgs []string = []string{}
 var sortArray []string = []string{}
 var silent bool = false
@@ -31,9 +31,9 @@ func SetPort(n int) {
 	port = n
 }
 
-// SetWindowName : Set Window Name
-func SetWindowName(s string) {
-	windowName = s
+// SetSubURL : Set Window Name
+func SetSubURL(s string) {
+	subURL = s
 }
 
 // SetSort : Sort By Index
@@ -76,11 +76,11 @@ func flagstone(done chan bool, exeName string, message string) {
 	}
 
 	// randomize window name
-	if windowName == "" {
+	if subURL == "" {
 		n, _ := rand.Int(rand.Reader, big.NewInt(int64(math.MaxInt64)))
 		b := []byte(n.String())
 		sha512 := sha512.Sum512(b)
-		windowName = hex.EncodeToString(sha512[:])
+		subURL = hex.EncodeToString(sha512[:])
 	}
 
 	// get flags
@@ -104,7 +104,7 @@ func flagstone(done chan bool, exeName string, message string) {
 		}
 	}
 
-	win := gwu.NewWindow(windowName, exeName)
+	win := gwu.NewWindow(subURL, exeName)
 	win.Style().SetFullWidth()
 	win.SetHAlign(gwu.HACenter)
 	win.SetCellPadding(2)
@@ -302,9 +302,9 @@ func flagstone(done chan bool, exeName string, message string) {
 	if silent {
 		w := log.Writer()
 		log.SetOutput(ioutil.Discard)
-		server.Start(windowName)
+		server.Start(subURL)
 		log.SetOutput(w)
 	} else {
-		server.Start(windowName)
+		server.Start(subURL)
 	}
 }
