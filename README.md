@@ -60,7 +60,10 @@ go get github.com/kurehajime
 1. Finish!
 
     When you run the program, the browser starts.
+
     Pressing the "Run" button sets the flag and runs the program.
 
 
     ![screenshot](https://user-images.githubusercontent.com/4569916/74208613-ac3b6d00-4cc7-11ea-9f3c-e686874f2e38.png)
+
+    
