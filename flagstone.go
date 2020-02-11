@@ -129,7 +129,7 @@ func SetCSS(s string) {
 // Launch : Capture the flag
 func Launch(title string, message string) ([]string, bool) {
 	done := make(chan bool)
-	go flagstone(done, title, message)
+	go lanchServer(done, title, message)
 	return nonFlagArgs, <-done
 }
 
@@ -142,10 +142,9 @@ func indexOf(arr []string, str string) int {
 	return -1
 }
 
-// flagstone core
-func flagstone(done chan bool, exeName string, message string) {
+// lanchServer : lanch server
+func lanchServer(done chan bool, exeName string, message string) {
 	var flags []*flag.Flag
-	var submit bool = false
 	tbArgs := gwu.NewTextBox("")
 	if len(flag.Args()) > 0 {
 		tbArgs.SetText(strings.Join(flag.Args(), "\n"))
@@ -172,6 +171,24 @@ func flagstone(done chan bool, exeName string, message string) {
 			return a < b
 		})
 	}
+
+	// run server
+	server := gwu.NewServer("x", "localhost:"+strconv.Itoa(port))
+	server.AddWin(createPage(done, flags, exeName, message))
+	if silent {
+		w := log.Writer()
+		log.SetOutput(ioutil.Discard)
+		server.Start(subURL)
+		log.SetOutput(w)
+	} else {
+		server.Start(subURL)
+	}
+}
+
+// create page
+func createPage(done chan bool, flags []*flag.Flag, exeName string, message string) gwu.Window {
+	var submit bool = false
+	tbArgs := gwu.NewTextBox("")
 
 	// create  window
 	if exeName == "" {
@@ -286,13 +303,14 @@ func flagstone(done chan bool, exeName string, message string) {
 	win.Add(t)
 
 	ticker := time.NewTicker(100 * time.Millisecond)
-	defer ticker.Stop()
 	go func() {
 		for {
 			select {
 			case <-ticker.C:
 				if loaded && time.Now().Sub(lastTime).Seconds() >= 1 {
 					done <- submit
+					ticker.Stop()
+					break
 				}
 			}
 		}
@@ -301,16 +319,5 @@ func flagstone(done chan bool, exeName string, message string) {
 	// css
 	cssHTML := "<style>" + css + "</style>"
 	win.Add(gwu.NewHTML(cssHTML))
-
-	// run server
-	server := gwu.NewServer("x", "localhost:"+strconv.Itoa(port))
-	server.AddWin(win)
-	if silent {
-		w := log.Writer()
-		log.SetOutput(ioutil.Discard)
-		server.Start(subURL)
-		log.SetOutput(w)
-	} else {
-		server.Start(subURL)
-	}
+	return win
 }
