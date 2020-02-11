@@ -25,6 +25,76 @@ var nonFlagArgs []string = []string{}
 var sortArray []string = []string{}
 var silent bool = false
 var useNonFlagArgs bool = false
+var css = `
+body {
+	background: linear-gradient(-45deg, #fbf3dc, #d8f6fa, #d3dbf6, #d3f6ee);
+	background-size: 400% 400%;
+	animation: gradient 12s ease infinite;
+	font-size: 18px; font-style: normal; 
+}
+.name,.title,.desc,.description { 
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; 
+	font-variant: normal; 
+	font-weight: 400; 
+	line-height: 30px; 
+	display:block;
+	floet:left;
+} 
+.name{
+	font-size: 22px; font-style: normal; 
+	width:150px;
+	text-align:right;
+	margin-right: 5px;
+	text-decoration: underline; 
+}
+.title{
+	font-size: 64px; font-style: bold; 
+	line-height: 80px; 
+}
+.input{
+	font-size: 150%;
+	min-width:200px;
+}
+.desc{
+	width:350px;
+	word-break: break-all;
+	margin-left: 5px;
+}
+.description{
+	width: 70%;
+}
+button {
+	display: inline-block;
+	width: 70%;
+	text-align: center;
+	background-color: #5373dc;
+	font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; 
+	font-size: 24px;
+	color: #FFF;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 10px 24px;
+	margin-top: 30px;
+	border-radius: 4px;
+	border-bottom: 2px solid #2649bc;
+	margin-bottom: 10px;
+}
+button:hover {
+	transform: translateY(2px);
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	60% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+`
 
 // SetPort : Set port number
 func SetPort(n int) {
@@ -67,6 +137,7 @@ func indexOf(arr []string, str string) int {
 	return -1
 }
 
+// flagstone core
 func flagstone(done chan bool, exeName string, message string) {
 	var flags []*flag.Flag
 	var submit bool = false
@@ -223,78 +294,8 @@ func flagstone(done chan bool, exeName string, message string) {
 	}()
 
 	// css
-	css := `
-	<style>
-	body {
-		background: linear-gradient(-45deg, #fbf3dc, #d8f6fa, #d3dbf6, #d3f6ee);
-		background-size: 400% 400%;
-		animation: gradient 12s ease infinite;
-		font-size: 18px; font-style: normal; 
-	}
-	.name,.title,.desc,.description { 
-		font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; 
-		font-variant: normal; 
-		font-weight: 400; 
-		line-height: 30px; 
-		display:block;
-		floet:left;
-	} 
-	.name{
-		font-size: 22px; font-style: normal; 
-		width:150px;
-		text-align:right;
-		margin-right: 5px;
-		text-decoration: underline; 
-	}
-	.title{
-		font-size: 64px; font-style: bold; 
-		line-height: 80px; 
-	}
-	.input{
-		font-size: 150%;
-		min-width:200px;
-	}
-	.desc{
-		width:350px;
-		word-break: break-all;
-		margin-left: 5px;
-	}
-	.description{
-		width: 70%;
-	}
-	button {
-		display: inline-block;
-		width: 70%;
-		text-align: center;
-		background-color: #5373dc;
-		font-family: "Arial Black", "Arial Bold", Gadget, sans-serif; 
-		font-size: 24px;
-		color: #FFF;
-		text-decoration: none;
-		font-weight: bold;
-		padding: 10px 24px;
-		margin-top: 30px;
-		border-radius: 4px;
-		border-bottom: 2px solid #2649bc;
-		margin-bottom: 10px;
-	}
-	button:hover {
-		transform: translateY(2px);
-	}
-
-	@keyframes gradient {
-		0% {
-			background-position: 0% 50%;
-		}
-		60% {
-			background-position: 100% 50%;
-		}
-		100% {
-			background-position: 0% 50%;
-		}
-	}
-  	</style>`
-	win.Add(gwu.NewHTML(css))
+	cssHTML := "<style>" + css + "</style>"
+	win.Add(gwu.NewHTML(cssHTML))
 
 	// run server
 	server := gwu.NewServer("x", "localhost:"+strconv.Itoa(port))

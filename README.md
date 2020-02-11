@@ -23,13 +23,13 @@ go get github.com/kurehajime
         "fmt"
     )
 
-    var message *string
+    var who *string
 
     func main() {
-        message = flag.String("message", "world", "say hello to ...")
+        who = flag.String("who", "world", "say hello to ...")
         flag.Parse()
 
-        fmt.Println("hello " + *message + "!")
+        fmt.Println("hello " + *who + "!")
     }
     ```
 
@@ -44,15 +44,15 @@ go get github.com/kurehajime
         "fmt"
     )
 
-    var message *string
+    var who *string
 
     func main() {
-        message = flag.String("message", "world", "say hello to ...")
+        who = flag.String("who", "world", "say hello to ...")
         flag.Parse()
 
         flagstone.Launch("helloworld", "flagstone sample") //★ here ★
 
-        fmt.Println("hello " + *message + "!")
+        fmt.Println("hello " + *who + "!")
     }
 
     ```
