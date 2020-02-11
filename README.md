@@ -2,7 +2,7 @@
 
 flagstone is a Go library to convert flags to web UI.
 
-![flagstone](https://user-images.githubusercontent.com/4569916/74206771-2831b700-4cc0-11ea-87fc-e88c9b23261c.png) 
+![flagstone](https://user-images.githubusercontent.com/4569916/74228957-ce9fab80-4d04-11ea-8eb5-2970496e75c5.png) 
 
 ## install 
 
