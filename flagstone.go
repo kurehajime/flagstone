@@ -24,7 +24,7 @@ var windowName string = ""
 var nonFlagArgs []string = []string{}
 var sortArray []string = []string{}
 var silent bool = false
-var useNonFlagArgs bool = true
+var useNonFlagArgs bool = false
 
 // SetPort : Set port number
 func SetPort(n int) {
