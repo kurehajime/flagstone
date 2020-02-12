@@ -7,7 +7,7 @@ flagstone is a Go library to convert flags to web UI.
 ## install 
 
 ```
-go get github.com/kurehajime
+go get github.com/kurehajime/flagstone
 ```
 
 ## usage
