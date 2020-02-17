@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"flagstone"
 	"fmt"
+
+	"github.com/kurehajime/flagstone"
 )
 
 var (
