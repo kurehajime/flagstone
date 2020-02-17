@@ -1,4 +1,4 @@
-module flagstone
+module github.com/kurehajime/flagstone
 
 go 1.13
 
