@@ -40,7 +40,7 @@ go get github.com/kurehajime/flagstone
 
     import (
         "flag"
-        "flagstone" //★ here ★
+        "github.com/kurehajime/flagstone" //★ here ★
         "fmt"
     )
 
