@@ -6,4 +6,4 @@ require (
     github.com/kurehajime/flagstone
 )
 
-replace github.com/kurehajime/flagstone => ../../flagstone
+replace github.com/kurehajime/flagstone => ../../../flagstone
